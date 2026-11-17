@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petualangan Napas – IPAS Kelas 6</title>
+<style>
+:root{--sky:#dff3ff;--sea:#1ea5e8;--ink:#12335a;--card:#ffffff;--red:#e63946;--green:#2fa84f;--sun:#ffc93c;--wood:#c98a4b;--wood2:#f6dfb8;--bad:#fff0ee;--ok:#e8f8ec;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#0e2a47;--sea:#1a7fb8;--ink:#eaf4ff;--card:#17406a;--wood2:#3b2f22;--bad:#4a2326;--ok:#18402a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:"Baloo 2","Comic Sans MS","Trebuchet MS",system-ui,sans-serif;background:linear-gradient(var(--sky),#8fd3f5 60%,var(--sea));color:var(--ink);min-height:100vh;font-size:17px;line-height:1.5}
+header{text-align:center;padding:16px 12px 4px}
+.title{display:inline-block;background:var(--wood2);border:4px solid var(--wood);border-radius:18px;padding:6px 22px;box-shadow:0 5px 0 #8a5a2b}
+.title h1{margin:0;font-size:clamp(24px,5vw,40px);color:var(--red);line-height:1.15}
+.title p{margin:0;font-size:15px}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px}
+nav button,.btn{font:inherit;font-weight:700;color:var(--ink);background:var(--wood2);border:3px solid var(--wood);border-radius:14px;padding:8px 16px;cursor:pointer;box-shadow:0 4px 0 #8a5a2b;transition:transform .1s}
+nav button:active,.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #8a5a2b}
+nav button[aria-current=true]{background:var(--sun)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+main{max-width:860px;margin:0 auto;padding:0 14px 40px}
+section{display:none;background:var(--card);border-radius:22px;padding:20px;box-shadow:0 6px 0 rgba(0,0,0,.15)}
+section.on{display:block}
+h2{margin:.2em 0 .5em;color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.organ{background:var(--sky);border:3px solid var(--sea);border-radius:16px;padding:12px;text-align:left;font:inherit;color:var(--ink);cursor:pointer}
+.organ .e{font-size:34px;display:block}
+.organ .d{display:none;margin-top:6px;font-size:15px}
+.organ.open{background:var(--sun);color:#12335a;border-color:var(--wood)}
+.organ.open .d{display:block}
+.bar{height:16px;background:#cfe9f7;border-radius:10px;overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .4s}
+.stage{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center}
+#lung{transform-origin:100px 120px;transition:transform 2.2s ease-in-out}
+#dia{transition:d 2.2s ease-in-out}
+.air{font-size:26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{font:inherit;font-weight:700;background:var(--wood2);color:var(--ink);border:3px solid var(--wood);border-radius:999px;padding:6px 14px;cursor:pointer}
+.chip.done{background:var(--ok);border-color:var(--green)}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--sky);border:3px solid var(--sea);border-radius:14px;padding:10px 14px;margin:8px 0;cursor:pointer}
+.opt.right{background:var(--ok);border-color:var(--green)}
+.opt.wrong{background:var(--bad);border-color:var(--red)}
+input[type=text]{font:inherit;width:100%;padding:10px 14px;border:3px solid var(--sea);border-radius:14px;color:var(--ink);background:var(--card)}
+.fb{margin:12px 0;padding:12px 14px;border-radius:14px;font-weight:600}
+.fb.ok{background:var(--ok);border:3px solid var(--green)}
+.fb.no{background:var(--bad);border:3px solid var(--red)}
+.star{font-size:42px;text-align:center}
+.faces button{font-size:34px;background:none;border:3px solid transparent;border-radius:50%;cursor:pointer}
+.faces button[aria-pressed=true]{border-color:var(--red);background:var(--sun)}
+.hint{font-size:14px;opacity:.85}
+@media (prefers-reduced-motion:reduce){#lung,#dia,.bar i{transition:none}}
+</style>
+</head>
+<body>
+<header>
+ <div class="title"><h1>🫁 Petualangan Napas</h1><p>IPAS Kelas 6 · Fase C · Sistem Pernapasan Manusia</p></div>
+</header>
+<nav id="nav" aria-label="Menu">
+ <button data-s="s0">🏠 Mulai</button><button data-s="s1">🎯 Tujuan</button><button data-s="s2">📖 Materi</button><button data-s="s3">🎮 Aktivitas</button><button data-s="s4">📝 Kuis</button><button data-s="s5">💬 Refleksi</button>
+</nav>
+<main>
+
+<section id="s0" class="on">
+ <h2>Halo, Penjelajah Napas! 👋</h2>
+ <p>Setiap detik kamu menarik dan mengembuskan napas. Ke mana udara itu pergi di dalam tubuhmu? Ayo jelajahi bersama!</p>
+ <p><b>Mata pelajaran:</b> IPAS · <b>Topik:</b> Sistem pernapasan manusia · <b>Materi:</b> Tarik dan embuskan napas</p>
+ <label for="nama"><b>Namamu:</b></label>
+ <input type="text" id="nama" placeholder="Tulis namamu di sini" autocomplete="off">
+ <p style="text-align:center"><button class="btn" data-go="s1">Ayo mulai! 🚀</button></p>
+</section>
+
+<section id="s1">
+ <h2>🎯 Tujuan Pembelajaran</h2>
+ <p>Setelah belajar, kamu bisa:</p>
+ <div class="grid">
+  <div class="organ">✅ Menyebutkan <b>organ-organ</b> pernapasan manusia.</div>
+  <div class="organ">✅ Menjelaskan <b>jalur udara</b> saat bernapas.</div>
+  <div class="organ">✅ Menjelaskan cara <b>menarik dan mengembuskan</b> napas.</div>
+ </div>
+ <p style="text-align:center"><button class="btn" data-go="s2">Lanjut ke Materi 📖</button></p>
+</section>
+
+<section id="s2">
+ <h2>📖 Materi Singkat</h2>
+ <p><b>Sistem pernapasan</b> membantu tubuh memasukkan <b>oksigen (O₂)</b> dan mengeluarkan <b>karbon dioksida (CO₂)</b>. Ketuk kartu untuk melihat fungsinya!</p>
+ <div class="bar" aria-hidden="true"><i id="pbar"></i></div>
+ <p class="hint" id="pcount">Dibuka: 0 dari 7 organ</p>
+ <div class="grid" id="organs"></div>
+ <h3>Tarik dan embuskan napas</h3>
+ <p><b>Tarik napas (inspirasi):</b> otot diafragma berkontraksi dan turun, tulang rusuk terangkat, rongga dada membesar, udara masuk ke paru-paru.</p>
+ <p><b>Embuskan napas (ekspirasi):</b> diafragma melemas dan naik, rongga dada mengecil, udara kaya CO₂ keluar.</p>
+ <p style="text-align:center"><button class="btn" data-go="s3">Main Aktivitas 🎮</button></p>
+</section>
+
+<section id="s3">
+ <h2>🎮 Aktivitas Interaktif</h2>
+ <h3>1. Coba bernapas!</h3>
+ <div class="stage">
+  <svg viewBox="0 0 200 220" width="220" role="img" aria-label="Paru-paru dan diafragma">
+   <path d="M100 10v60" stroke="#e8a0a0" stroke-width="10" stroke-linecap="round"/>
+   <g id="lung"><ellipse cx="62" cy="110" rx="38" ry="58" fill="#ff8aa1"/><ellipse cx="138" cy="110" rx="38" ry="58" fill="#ff8aa1"/></g>
+   <path id="dia" d="M15 172 Q100 150 185 172" fill="none" stroke="#c98a4b" stroke-width="10" stroke-linecap="round"/>
+  </svg>
+  <div style="flex:1;min-width:200px">
+   <p id="bstate" style="font-size:20px;font-weight:700">Tekan tombol untuk mulai.</p>
+   <button class="btn" id="btnIn">😮‍💨 Tarik napas</button> <button class="btn" id="btnOut">💨 Embuskan</button>
+   <p class="hint">Lihat paru-paru membesar saat diafragma turun.</p>
+  </div>
+ </div>
+ <h3>2. Urutkan jalur udara</h3>
+ <p>Ketuk organ sesuai urutan dari luar tubuh sampai kantong udara.</p>
+ <div class="chips" id="chips"></div>
+ <p id="ord" style="font-weight:700">Urutanmu: –</p>
+ <div id="ordfb"></div>
+ <p style="text-align:center"><button class="btn" data-go="s4">Ke Kuis 📝</button></p>
+</section>
+
+<section id="s4">
+ <h2>📝 Kuis (10 Soal)</h2>
+ <div class="bar" aria-hidden="true"><i id="qbar"></i></div>
+ <div id="quiz"></div>
+</section>
+
+<section id="s5">
+ <h2>💬 Umpan Balik dan Refleksi</h2>
+ <div id="result"><p>Selesaikan kuis dulu ya, lalu kembali ke sini.</p></div>
+ <h3>Bagaimana perasaanmu belajar hari ini?</h3>
+ <div class="faces" id="faces"><button aria-label="Masih bingung" aria-pressed="false">😕</button><button aria-label="Lumayan paham" aria-pressed="false">🙂</button><button aria-label="Sangat paham" aria-pressed="false">🤩</button></div>
+ <p id="faceMsg"></p>
+ <h3>Renungkan:</h3>
+ <ul><li>Organ pernapasan apa yang paling kamu ingat?</li><li>Apa yang bisa kamu lakukan agar paru-parumu sehat?</li><li>Bagian mana yang ingin kamu pelajari lagi?</li></ul>
+</section>
+</main>
+
+<script>
+var $=function(i){return document.getElementById(i)};
+function show(id){document.querySelectorAll("section").forEach(function(s){s.classList.toggle("on",s.id===id)});document.querySelectorAll("#nav button").forEach(function(b){b.setAttribute("aria-current",b.dataset.s===id)});scrollTo({top:0,behavior:"smooth"});if(id==="s5")renderResult()}
+document.querySelectorAll("#nav button").forEach(function(b){b.onclick=function(){show(b.dataset.s)}});
+document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){show(b.dataset.go)}});
+show("s0");
+
+var O=[["👃","Hidung","Menyaring debu dengan rambut dan lendir, serta menghangatkan udara."],["🧣","Faring (tekak)","Saluran bersama untuk udara dan makanan, menuju laring."],["🗣️","Laring (pangkal tenggorok)","Tempat pita suara; ada katup yang menutup saat menelan."],["🌬️","Trakea (batang tenggorok)","Pipa udara dengan cincin tulang rawan agar tidak menutup."],["🌿","Bronkus","Cabang trakea ke paru-paru kanan dan kiri."],["🫁","Paru-paru","Dua organ utama tempat pertukaran gas."],["🫧","Alveolus","Kantong udara kecil; O₂ masuk ke darah, CO₂ keluar."]];
+var seen={};
+O.forEach(function(o,i){var b=document.createElement("button");b.className="organ";b.innerHTML='<span class="e">'+o[0]+'</span><b>'+o[1]+'</b><span class="d">'+o[2]+'</span>';b.onclick=function(){b.classList.toggle("open");seen[i]=1;var n=Object.keys(seen).length;$("pbar").style.width=n/7*100+"%";$("pcount").textContent="Dibuka: "+n+" dari 7 organ"+(n===7?" – hebat! 🎉":"")};$("organs").appendChild(b)});
+
+function breathe(inh){$("lung").style.transform=inh?"scale(1.25)":"scale(1)";$("dia").setAttribute("d",inh?"M15 172 Q100 192 185 172":"M15 172 Q100 150 185 172");$("bstate").textContent=inh?"⬇️ Diafragma turun, dada membesar, udara masuk (kaya O₂).":"⬆️ Diafragma naik, dada mengecil, udara keluar (kaya CO₂)."}
+$("btnIn").onclick=function(){breathe(true)};$("btnOut").onclick=function(){breathe(false)};
+
+var path=["Hidung","Faring","Laring","Trakea","Bronkus","Paru-paru","Alveolus"],pick=[];
+var order=path.slice().sort(function(){return Math.random()-.5});
+function drawChips(){$("chips").innerHTML="";order.forEach(function(n){var c=document.createElement("button");c.className="chip"+(pick.indexOf(n)>-1?" done":"");c.textContent=n;c.disabled=pick.indexOf(n)>-1;c.onclick=function(){if(path[pick.length]===n){pick.push(n);$("ord").textContent="Urutanmu: "+pick.join(" → ");$("ordfb").innerHTML=pick.length===7?'<div class="fb ok">🎉 Benar semua! Udara masuk lewat jalur ini sampai alveolus.</div>':"";drawChips()}else{$("ordfb").innerHTML='<div class="fb no">Belum tepat. Ingat: udara masuk dari hidung dulu. Coba lagi, kamu pasti bisa! 💪</div>';pick=[];$("ord").textContent="Urutanmu: –";drawChips()}};$("chips").appendChild(c)})}
+drawChips();
+
+var Q=[
+{t:"pg",q:"Organ tempat pertukaran oksigen dan karbon dioksida adalah …",o:["Trakea","Alveolus","Laring","Faring"],a:1,e:"Pertukaran gas terjadi di alveolus, kantong udara kecil di paru-paru."},
+{t:"pg",q:"Saat kita menarik napas, diafragma akan …",o:["Naik dan melemas","Diam saja","Turun dan rongga dada membesar","Naik dan dada mengecil"],a:2,e:"Saat tarik napas, diafragma berkontraksi dan turun sehingga rongga dada membesar."},
+{t:"pg",q:"Urutan jalur udara yang benar adalah …",o:["Hidung → trakea → faring → paru-paru","Hidung → faring → laring → trakea → bronkus → paru-paru","Faring → hidung → bronkus → trakea","Hidung → bronkus → laring → paru-paru"],a:1,e:"Jalurnya: hidung, faring, laring, trakea, bronkus, lalu paru-paru."},
+{t:"pg",q:"Rambut dan lendir di dalam hidung berfungsi untuk …",o:["Mengeluarkan CO₂","Menyaring debu dan kotoran","Membuat suara","Menyimpan oksigen"],a:1,e:"Rambut hidung dan lendir menangkap debu supaya paru-paru tetap bersih."},
+{t:"pg",q:"Gas dari udara yang paling dibutuhkan tubuh untuk hidup adalah …",o:["Karbon dioksida","Nitrogen","Oksigen","Uap air"],a:2,e:"Tubuh memakai oksigen untuk menghasilkan tenaga."},
+{t:"is",q:"Otot di bawah paru-paru yang membantu kita bernapas disebut …",k:["diafragma","otot diafragma","sekat rongga dada"],e:"Jawabannya diafragma, otot yang naik-turun saat kita bernapas."},
+{t:"is",q:"Saluran napas berbentuk pipa dengan cincin tulang rawan disebut … (batang tenggorok)",k:["trakea","batang tenggorok"],e:"Jawabannya trakea. Cincin tulang rawannya menjaga saluran tetap terbuka."},
+{t:"is",q:"Gas sisa yang dikeluarkan saat mengembuskan napas adalah …",k:["karbon dioksida","karbondioksida","co2","co₂"],e:"Jawabannya karbon dioksida (CO₂), gas sisa pernapasan."},
+{t:"is",q:"Kantong udara kecil di dalam paru-paru disebut …",k:["alveolus","alveoli"],e:"Jawabannya alveolus. Jumlahnya jutaan di dalam paru-paru!"},
+{t:"is",q:"Manusia memiliki … paru-paru. (tulis angka atau huruf)",k:["2","dua"],e:"Manusia punya dua paru-paru: kanan dan kiri."}
+];
+var qi=0,score=0,done=false,cheer=["Hebat sekali! 🌟","Kamu pintar! 👏","Mantap, benar! 🎉","Keren, pertahankan! 🚀","Luar biasa! 🏅"];
+function ok(msg){return '<div class="fb ok">✅ '+cheer[qi%5]+' Jawabanmu benar.</div>'}
+function no(e){return '<div class="fb no">💡 '+e+' Jangan menyerah, kamu pasti bisa di soal berikutnya! 💪</div>'}
+function nextBtn(){return '<p><button class="btn" id="nx">'+(qi===9?"Lihat hasil 🏁":"Soal berikutnya ➡️")+'</button></p>'}
+function ask(){
+ var d=Q[qi];$("qbar").style.width=qi/10*100+"%";var h='<p class="hint">Soal '+(qi+1)+' dari 10 · '+(d.t==="pg"?"Pilihan ganda":"Isian singkat")+'</p><p><b>'+d.q+'</b></p>';
+ if(d.t==="pg"){h+='<div id="opts">'+d.o.map(function(x,i){return '<button class="opt" data-i="'+i+'">'+"ABCD"[i]+". "+x+'</button>'}).join("")+'</div>'}
+ else{h+='<input type="text" id="ans" aria-label="Jawaban" autocomplete="off"><p><button class="btn" id="chk">Periksa ✔️</button></p>'}
+ h+='<div id="fb"></div>';$("quiz").innerHTML=h;
+ if(d.t==="pg"){document.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){var i=+b.dataset.i,r=i===d.a;document.querySelectorAll(".opt").forEach(function(x){x.disabled=true});b.classList.add(r?"right":"wrong");if(!r)document.querySelectorAll(".opt")[d.a].classList.add("right");if(r)score++;$("fb").innerHTML=(r?ok():no(d.e))+nextBtn();$("nx").onclick=nxt}})}
+ else{$("chk").onclick=function(){var v=$("ans").value.trim().toLowerCase();if(!v)return;var r=d.k.indexOf(v)>-1;$("ans").disabled=true;$("chk").style.display="none";if(r)score++;$("fb").innerHTML=(r?ok():no(d.e))+nextBtn();$("nx").onclick=nxt};$("ans").onkeydown=function(e){if(e.key==="Enter")$("chk").click()}}
+}
+function nxt(){qi++;if(qi>9){$("qbar").style.width="100%";done=true;$("quiz").innerHTML='<div class="star">🏆</div><h3 style="text-align:center">Kuis selesai! Skormu: '+score*10+'</h3><p style="text-align:center"><button class="btn" data-go="s5" id="toR">Ke Refleksi 💬</button></p>';$("toR").onclick=function(){show("s5")}}else ask()}
+ask();
+
+function renderResult(){if(!done)return;var n=$("nama").value.trim()||"Penjelajah",s=score*10,m=s>=80?"Luar biasa, "+n+"! Kamu sudah paham sistem pernapasan. 🌟":s>=60?"Bagus, "+n+"! Sedikit lagi kamu mahir. Baca ulang materi untuk bagian yang masih keliru. 📖":"Semangat, "+n+"! Belajar itu proses. Coba ulangi Materi dan Aktivitas, lalu kerjakan kuis lagi. 💪";$("result").innerHTML='<div class="fb ok"><div class="star">'+(s>=80?"🌟":s>=60?"👍":"💪")+'</div>Skor: <b>'+s+'</b> ('+score+' dari 10 benar)<br>'+m+'</div><p><button class="btn" id="again">Ulangi kuis 🔁</button></p>';$("again").onclick=function(){qi=0;score=0;done=false;ask();show("s4")}}
+var fm=["Tidak apa-apa. Buka lagi bagian Materi dan Aktivitas, ya!","Bagus! Coba kuis lagi untuk lebih mantap.","Hebat! Ceritakan pada temanmu cara kita bernapas."];
+document.querySelectorAll("#faces button").forEach(function(b,i){b.onclick=function(){document.querySelectorAll("#faces button").forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");$("faceMsg").textContent=fm[i]}});
+</script>
+</body>
+</html>
